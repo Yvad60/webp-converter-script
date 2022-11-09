@@ -72,5 +72,5 @@ ubuntu@ubuntu:~/Documents$ node convert.js OPTION [ARGUMENTS]
 You can customize this script by editing the global variables
 
 - **SUPPORTED_FILES_REGEX** : use it to expand the number of images to convert.
-- **QUALITY** : use this to customize the quality of the output image.
+- **QUALITY** : use this to customize the quality of the output image. QUALITY should be a number between 0 and 100.
 - **PATH**: use this to customize the path containing images.
