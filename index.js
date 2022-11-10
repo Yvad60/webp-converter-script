@@ -2,6 +2,7 @@ const webp = require("webp-converter");
 const fs = require("fs");
 const { promisify } = require("util");
 const { exit } = require("process");
+const path = require("path");
 
 fs.readdir = promisify(fs.readdir);
 fs.unlink = promisify(fs.unlink);
@@ -9,27 +10,26 @@ fs.unlink = promisify(fs.unlink);
 const SUPPORTED_FILES_REGEX = /\.(png|jpe?g)$/;
 // image quality of the output file
 const QUALITY = 85;
+// directory containing images
+const PATH = "";
 
 // returns a list of images
 const getAllImages = async () => {
-  const files = await await fs.readdir("./");
+  const filename = path.join(__dirname, PATH);
+  const files = await fs.readdir(filename);
   return files.filter((image) => SUPPORTED_FILES_REGEX.test(image));
 };
+
 const convert = async (image, output = image.split(".")[0] + ".webp") => {
   return webp.cwebp(image, output, `-q ${QUALITY}`);
 };
-const deleteFile = async (file) => await fs.unlink(file);
+
 const convertAll = async (del = false) => {
   try {
     const images = await getAllImages();
     images.forEach(async (image) => {
       await convert(image);
     });
-    if (del) {
-      images.forEach((image) => {
-        deleteFile(image);
-      });
-    }
   } catch (error) {
     console.log("Error: ", error.message);
   }
