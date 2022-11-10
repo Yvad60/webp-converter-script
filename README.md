@@ -43,10 +43,7 @@ const convertAll = async (del = false) => {
 };
 if (process.argv[2] === "ALL") {
   convertAll(true);
-} else if (process.argv[2] === "ALL") {
-  convertAll();
 }
-
 if (process.argv[2] === "ONE" && process.argv.length === 5) {
   convert(process.argv[3], process.argv[4]);
 }
