@@ -34,7 +34,7 @@ const convertAll = async (del = false) => {
     console.log("Error: ", error.message);
   }
 };
-if (process.argv[2] === "ALL" && process.argv[3] === "--delete") {
+if (process.argv[2] === "ALL") {
   convertAll(true);
 } else if (process.argv[2] === "ALL") {
   convertAll();
